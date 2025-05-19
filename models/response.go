@@ -1,4 +1,4 @@
-package responseModels
+package models
 
 import (
 	"encoding/json"
@@ -7,8 +7,9 @@ import (
 )
 
 type ErrorResponse struct {
-	Code int
-	Err  error
+	Code        int
+	MessageType string
+	Err         error
 }
 
 func (e *ErrorResponse) Error() string {
@@ -17,7 +18,7 @@ func (e *ErrorResponse) Error() string {
 
 func (e *ErrorResponse) Write(w http.ResponseWriter) {
 	w.WriteHeader(e.Code)
-	w.Write([]byte(fmt.Sprintf(`{"error":"%s","code":%d}`, e.Err.Error(), e.Code)))
+	w.Write([]byte(fmt.Sprintf(`{"message":"%s","code":%s}`, e.Err.Error(), e.MessageType)))
 }
 
 type SuccessResponse struct {

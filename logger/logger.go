@@ -2,9 +2,9 @@
 package logger
 
 import (
-	"arc/logger/contextLogger"
 	"context"
 	"runtime"
+	"tkh/logger/basic"
 )
 
 type ILogger interface {
@@ -16,7 +16,7 @@ type ILogger interface {
 	RegisterContextHandler(ctx context.Context, name string, handler func(ctx context.Context) map[string]interface{}) error
 }
 
-var l ILogger = &contextLogger.Logger{}
+var l ILogger = &basic.Logger{}
 
 func Println(args ...interface{}) {
 	_, file, line, _ := runtime.Caller(1)
