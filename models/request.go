@@ -16,7 +16,7 @@ type IReqModel interface {
 }
 
 type OrderReq struct {
-	CouponCode string `json:"couponCode"`
+	CouponCode string `json:"couponCode" validate:"greater=7,lesser=11"`
 	Items      []Item `json:"items" validate:"greater=0"`
 }
 
